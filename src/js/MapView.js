@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Map, InfoWindow, GoogleApiWrapper} from 'google-maps-react';
+import LoadError from './LoadError.js'
 
 class MapView extends Component {
   state = {
@@ -128,4 +129,4 @@ class MapView extends Component {
   }
 }
 
-export default GoogleApiWrapper({apiKey: 'AIzaSyDyM-LmAbfx7QdOvtt2QON2RiyRDYdn5Cs'})(MapView);
+export default GoogleApiWrapper({apiKey: 'AIzaSyDyM-LmAbfx7QdOvtt2QON2RiyRDYdn5Cs', LoadingContainer: LoadError})(MapView);
