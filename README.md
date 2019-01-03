@@ -28,7 +28,7 @@ Then run the following command to serve the app on a static server:
 
 serve -s build
 
-Your terminal should give you a "Serving!" message and indicate what port the app is running on (http://localhost:5000 for example)
+Your terminal should now indicate what port the app is running on (http://localhost:5000 for example)
 
 Open the corresponding localhost URL in your browser to view the production build of the application.
 
