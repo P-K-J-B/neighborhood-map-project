@@ -40,18 +40,26 @@ class App extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({ theatres: data.response.venues, filtered: this.applyFilter(data.response.venues, '') });
-    }).catch((err) => {
-      console.log(err);
-    });
+    }).catch((err) => { console.log('Fetching Foursquare data failed' + err); });
   };
 
   itemClickHandler = (inx) => {
     this.setState({ itemInx: inx });
+    setTimeout(() => {
+      document.getElementById('venue-info').focus();
+    }, 1);
   };
 
   toggleMenu = () => {
+    var menu = document.querySelector('#menu');
+    var menuButton = document.querySelector('#menu > button');
     document.querySelector('.list-view').classList.toggle('menu-hidden');
-    document.querySelector('#menu').classList.toggle('active');
+    menu.classList.toggle('active');
+    if (menu.classList.contains('active')) {
+      menuButton.setAttribute('aria-label', 'hide filter menu');
+    } else if (!menu.classList.contains('active')) {
+      menuButton.setAttribute('aria-label', 'show filter menu');
+    }
   };
 
   render() {
@@ -62,7 +70,7 @@ class App extends Component {
           applyFilter={this.updateQuery}
           itemClickHandler={this.itemClickHandler}
         />
-        <div id='menu' className='active'><button onClick={evt => document.querySelector('#menu') ? this.toggleMenu() : null}><span></span></button></div>
+        <div id='menu' className='active'><button aria-label='hide filter menu' onClick={evt => document.querySelector('#menu') ? this.toggleMenu() : null}><span></span></button></div>
         <div id='map'>
           <MapView
             theatres={this.state.filtered}

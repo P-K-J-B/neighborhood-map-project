@@ -94,7 +94,7 @@ class MapView extends Component {
   render() {
     var mapStyle = {
       width: '100%',
-      height: '100%'
+      height: '100vh'
     }
     var centre = {
       lat: '53.800',
@@ -103,6 +103,8 @@ class MapView extends Component {
     var cmProps = this.state.currentMarkerProps;
     return (
         <Map
+          role='application'
+          aria-label='map'
           onReady={this.mapLoaded}
           google={this.props.google}
           zoom={13}
@@ -112,7 +114,7 @@ class MapView extends Component {
               marker={this.state.currentMarker}
               visible={this.state.infoWindowVisible}
               onClose={this.closeInfoWindow}>
-              <div>
+              <div id='venue-info' tabIndex='0'>
                 <h3>{cmProps && cmProps.name}</h3>
                 {cmProps && cmProps.address[0] && <p>{cmProps.address[0]}</p>}
                 {cmProps && cmProps.address[1] && <p>{cmProps.address[1]}</p>}

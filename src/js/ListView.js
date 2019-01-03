@@ -17,20 +17,20 @@ class ListView extends Component {
             <div className='search'>
                 <input
                     type='text'
-                    placeholder='Search theatres in Leeds'
+                    placeholder='Search Theatres'
                     value={this.state.query}
                     onChange={(queryText) => {this.updateQuery(queryText.target.value)}}
                 />
             </div>
-            <div className='list-container'>
+            <nav className='list-container'>
                 {this.props.theatres && (
-                    <ol className='list'>
+                    <section className='list' role='list'>
                         {this.props.theatres.map((t, inx) =>
-                            <button key={inx} onClick={evt => this.props.itemClickHandler(inx)}>{t.name}</button>
+                            <button key={inx} role='listitem' onClick={evt => this.props.itemClickHandler(inx)}>{t.name}</button>
                         )}
-                    </ol>
+                    </section>
                 )}
-            </div>
+            </nav>
         </div>
       );
     }
