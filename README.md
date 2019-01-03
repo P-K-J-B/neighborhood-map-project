@@ -10,19 +10,23 @@ Clone this repository to your machine by opening a terminal in a directory of yo
 
 git clone https://github.com/P-K-J-B/neighborhood-map-project
 
-### Developer Mode
-
 cd into the neighborhood-map-project directory and run: npm install
+
+### Viewing App in Developer Mode
 
 After npm install has finished running, run: npm start
 
 This will open a browser window at localhost:3000 (this will allow you to view the app in a live editing environment / developer mode)
 
-### Production Mode
+### Viewing App in Production Mode
 
-Make sure that serve is installed globally on your machine: npm install -g serve
+In order to see the app in production mode, you will have to run a build. While in the neighborhood-map-project directory run: 
 
-cd into the neighborhood-map-project directory and run: serve -s build
+npm run build
+
+Then run:
+
+serve -s build
 
 Your terminal should give you a "Serving!" message and indicate what port the app is running on (http://localhost:5000 for example)
 
