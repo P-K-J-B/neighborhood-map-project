@@ -1,3 +1,15 @@
+* {
+  margin: 0;
+}
+
+p {
+  line-height: 1.5em;
+}
+
+h3 {
+  margin: 5px 0;
+}
+
 .App {
   position: absolute;
   width: 100vw;
@@ -10,7 +22,40 @@
   min-width: 260px;
   height: 100%;
   left: 0;
-  background-color: grey;
+  background-color: rgb(58, 58, 58);
+  overflow: auto;
+}
+
+.search {
+  margin: 20px;
+}
+
+.search input {
+  width: 100%;
+  height: 35px;
+}
+
+.list {
+  color: white;
+  font-size: .9em;
+  padding: 0;
+}
+
+.list li {
+  list-style: none;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  padding: 0 20px;
+}
+
+.list li:hover {
+  background-color: rgb(93, 93, 93);
+}
+
+.list li p {
+  position: relative;
+  margin: auto 0;
 }
 
 #map {
@@ -22,4 +67,6 @@
 
 header {
   color: white;
+  padding: 20px 20px 0 20px;
 }
+
