@@ -5,14 +5,30 @@ class MapView extends Component {
   state = {
     map: null,
     markers: [],
-    markerDetails: [],
+    markerProps: [],
     currentMarker: null,
     currentMarkerProps: null,
     infoWindowVisible: false
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setMarkers(nextProps.theatres);
+    if (this.state.markers.length !== nextProps.theatres.length) {
+      this.closeInfoWindow()
+      this.setMarkers(nextProps.theatres)
+      this.setState({ currentMarker: null })
+      return;
+    }
+
+    if (!nextProps.itemInx || (this.state.currentMarker && (this.state.markers[nextProps.itemInx] !== this.state.currentMarker))) {
+      this.closeInfoWindow();
+    }
+
+    if (nextProps.itemInx === null || typeof(nextProps.itemInx) === 'undefined') {
+      return;
+    }
+
+    this.onMarkerClick(this.state.markerProps[nextProps.itemInx], this.state.markers[nextProps.itemInx]);
+
   }
 
   mapLoaded = (x, map) => {
@@ -25,15 +41,17 @@ class MapView extends Component {
     this.setState({ infoWindowVisible: false, currentMarker: null, currentMarkerProps: null })
   }
 
-  onMarkerClick = (markup, marker, evt) => {
+  onMarkerClick = (props, marker, evt) => {
     this.closeInfoWindow();
-    this.setState({ infoWindowVisible: true, currentMarker: marker, currentMarkerProps: markup })
+    this.setState({ infoWindowVisible: true, currentMarker: marker, currentMarkerProps: props })
+    marker.setAnimation(this.props.google.maps.Animation.BOUNCE);
+    setTimeout(() => {marker.setAnimation(null)}, 1000)
   }
 
   setMarkers = (venues) => {
 
     if (!venues) {
-      return console.log('no venues');
+      return;
     }
 
     this.state.markers.forEach(marker => marker.setMap(null));
@@ -100,6 +118,7 @@ class MapView extends Component {
                 {cmProps && cmProps.address[1] && <p>{cmProps.address[1]}</p>}
                 {cmProps && cmProps.address[2] && <p>{cmProps.address[2]}</p>}
                 {cmProps && cmProps.address[3] && <p>{cmProps.address[3]}</p>}
+                <div className='credit'><i>Data courtesy of <a href='https://developer.foursquare.com/'>Foursquare</a></i></div>
               </div>
             </InfoWindow>
         </Map>    

@@ -41,19 +41,24 @@ h3 {
   padding: 0;
 }
 
-.list li {
+.list button {
   list-style: none;
   height: 50px;
   cursor: pointer;
   display: flex;
   padding: 0 20px;
+  border: 0;
+  background: none;
+  width: 100%;
+  text-align: left;
+  color: white;
 }
 
-.list li:hover {
+.list button:hover {
   background-color: rgb(93, 93, 93);
 }
 
-.list li p {
+.list button p {
   position: relative;
   margin: auto 0;
 }
@@ -70,3 +75,6 @@ header {
   padding: 20px 20px 0 20px;
 }
 
+.credit {
+  margin-top: 10px;
+}

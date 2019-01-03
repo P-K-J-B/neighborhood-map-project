@@ -26,10 +26,7 @@ class ListView extends Component {
                 {this.props.theatres && (
                     <ol className='list'>
                         {this.props.theatres.map((t, inx) =>
-                            <li
-                                key={inx}
-                            ><p>{t.name}</p>
-                            </li>
+                            <button key={inx} onClick={evt => this.props.itemClickHandler(inx)}>{t.name}</button>
                         )}
                     </ol>
                 )}

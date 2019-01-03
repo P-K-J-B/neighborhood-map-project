@@ -11,7 +11,8 @@ const fsCreds = {
 class App extends Component {
   state = {
     theatres: [],
-    filtered: null
+    filtered: null,
+    itemInx: null
   }
 
   componentDidMount = () => {
@@ -39,7 +40,13 @@ class App extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({ theatres: data.response.venues, filtered: this.applyFilter(data.response.venues, '') });
+    }).catch((err) => {
+      console.log(err);
     });
+  };
+
+  itemClickHandler = (inx) => {
+    this.setState({ itemInx: inx });
   };
 
   render() {
@@ -48,10 +55,12 @@ class App extends Component {
         <ListView
           theatres={this.state.filtered}
           applyFilter={this.updateQuery}
+          itemClickHandler={this.itemClickHandler}
         />
         <div id='map'>
           <MapView
             theatres={this.state.filtered}
+            itemInx={this.state.itemInx}
           />
         </div>
       </div>
