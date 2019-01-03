@@ -90,6 +90,11 @@ header {
   right: 0;
 }
 
+#venue-info {
+  outline: none;
+  border: none;
+}
+
 .credit {
   margin-top: 10px;
 }
