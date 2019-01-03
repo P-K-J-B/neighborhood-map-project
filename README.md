@@ -24,7 +24,7 @@ In order to see the app in production mode, you will have to run a build. While 
 
 npm run build
 
-Then run:
+Then run the following command to serve the app on a static server:
 
 serve -s build
 
