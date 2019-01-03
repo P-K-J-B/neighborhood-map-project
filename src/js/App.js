@@ -49,14 +49,20 @@ class App extends Component {
     this.setState({ itemInx: inx });
   };
 
+  toggleMenu = () => {
+    document.querySelector('.list-view').classList.toggle('menu-hidden');
+    document.querySelector('#menu').classList.toggle('active');
+  };
+
   render() {
     return (
-      <div className="App">
+      <div className='App'>
         <ListView
           theatres={this.state.filtered}
           applyFilter={this.updateQuery}
           itemClickHandler={this.itemClickHandler}
         />
+        <div id='menu' className='active'><button onClick={evt => document.querySelector('#menu') ? this.toggleMenu() : null}><span></span></button></div>
         <div id='map'>
           <MapView
             theatres={this.state.filtered}
