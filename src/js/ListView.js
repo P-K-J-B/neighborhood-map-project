@@ -20,6 +20,8 @@ class ListView extends Component {
             <header><h1>Theatres in Leeds</h1></header>
             <div className='search'>
                 <input
+                    aria-label='Filter input field'
+                    role='Search'
                     type='text'
                     placeholder='Search Theatres'
                     value={this.state.query}

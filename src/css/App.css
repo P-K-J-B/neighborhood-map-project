@@ -17,11 +17,23 @@ button:focus {
 }
 
 .App {
+  overflow: hidden;
+}
+
+.content {
   position: absolute;
   width: 100vw;
   height: 100vh;
   display: flex;
-  overflow: hidden;
+}
+
+.fs-error {
+  position: relative;
+  bottom: 30px;
+  margin: auto;
+  text-align: center;
+  color: rgb(58, 58, 58);
+  line-height: 4em;
 }
 
 header {

@@ -13,7 +13,8 @@ class App extends Component {
   state = {
     theatres: [], // an aray to house the venue details received from the Foursquare api
     filtered: null, // a version of the theatres array with a filter applied
-    itemInx: null // a property that represents the index of the most recently clicked item in the ListView sidebar
+    itemInx: null, // a property that represents the index of the most recently clicked item in the ListView sidebar
+    fsError: false
   }
 
   componentDidMount = () => {
@@ -44,7 +45,10 @@ class App extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({ theatres: data.response.venues, filtered: this.applyFilter(data.response.venues, '') });
-    }).catch((err) => { console.log('Fetching Foursquare data failed' + err); });
+    }).catch((err) => {
+      console.log(err);
+      this.setState({ fsError: true });
+    });
   };
 
 // populates the "itemInx" property in this.state with the index of a particular item (in the ListView sidebar) that was just clicked and sets focus on the corresponding info window
@@ -74,18 +78,29 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <ListView
-          theatres={this.state.filtered}
-          applyFilter={this.updateQuery}
-          itemClickHandler={this.itemClickHandler}
-        />
-        <div id='menu' className='active'><button aria-label='hide filter menu' onClick={evt => document.querySelector('#menu') ? this.toggleMenu() : null}><span></span></button></div>
-        <div id='map'>
-          <MapView
-            theatres={this.state.filtered}
-            itemInx={this.state.itemInx}
-          />
-        </div>
+        {this.state.fsError === true ? (
+          <main className='content'>
+            <div className='fs-error'>
+              <h1>Error Loading Data</h1>
+              <p>Map location details could not be retrieved from Foursquare</p>
+            </div>
+          </main> )
+          : (
+          <main className='content'>
+            <ListView
+              theatres={this.state.filtered}
+              applyFilter={this.updateQuery}
+              itemClickHandler={this.itemClickHandler}
+            />
+            <div id='menu' className='active'><button aria-label='hide filter menu' onClick={evt => document.querySelector('#menu') ? this.toggleMenu() : null}><span></span></button></div>
+            <div id='map'>
+              <MapView
+                theatres={this.state.filtered}
+                itemInx={this.state.itemInx}
+              />
+            </div>
+          </main> 
+          )}
       </div>
     );
   }

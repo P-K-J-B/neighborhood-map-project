@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 class LoadError extends Component {
     state = {
         showError: false, // boolean that dictates whether the UI should render either a "loading" or "error" message
-        time: null // a timer that will be used to check whether the map data is going to be received
+        time: null // a timer that will be used to check whether the map data is received within a reasonable timeframe
     }
 
-// when the component mounts, this sets a timeout funciton that will run the "showErrorMsg" function if the timer is allowed to exceed one second 
+// when the component mounts, this sets a timeout funciton that will run the "showErrorMsg" function if the timer exceeds ten seconds 
     componentDidMount = () => {
-        var time = window.setTimeout(this.showErrorMsg, 1000);
+        var time = window.setTimeout(this.showErrorMsg, 10000);
         this.setState({ time });
     }
 
@@ -17,7 +17,7 @@ class LoadError extends Component {
         window.clearTimeout(this.state.time);
     }
 
-// if the timer exceeds one second then the "showError" property is set to true and an error message will be rendered on the page
+// if the timer exceeds ten seconds then the "showError" property is set to true and an error message will be rendered on the page
     showErrorMsg = () => {
         this.setState({ showError: true });
     }
